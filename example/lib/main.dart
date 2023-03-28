@@ -86,6 +86,7 @@ class _ScrollablePositionedListPageState
       itemScrollController.scrollListener(
         (notification) {
           debugPrint(notification.position.maxScrollExtent.toString());
+
           /// do with notification
         },
       );
@@ -237,7 +238,6 @@ class _ScrollablePositionedListPageState
           scrollButton(0),
           scrollButton(5),
           scrollButton(10),
-          scrollButton(100),
           scrollButton(99),
           scrollButton(5000),
         ],
@@ -249,7 +249,6 @@ class _ScrollablePositionedListPageState
           jumpButton(0),
           jumpButton(5),
           jumpButton(10),
-          jumpButton(100),
           jumpButton(99),
           jumpButton(5000),
         ],

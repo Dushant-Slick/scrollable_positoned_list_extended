@@ -223,16 +223,16 @@ class ItemScrollController {
   }
 
   void jumpToMax({double alignment = 0}) {
-    if (!_scrollableListState!.widget.reverse) {
-      jumpTo(
-          index: _scrollableListState!.widget.itemCount - 1,
-          alignment: alignment);
-      Future.delayed(const Duration(milliseconds: 10), () {
-        _scrollableListState!._jumpToMax();
-      });
-    } else {
-      jumpToMin();
-    }
+    jumpTo(
+        index: _scrollableListState!.widget.reverse
+            ? 0
+            : _scrollableListState!.widget.itemCount - 1,
+        alignment: alignment);
+    Future.delayed(const Duration(milliseconds: 10), () {
+      _scrollableListState!.widget.reverse
+          ? _scrollableListState!._jumpToMin()
+          : _scrollableListState!._jumpToMax();
+    });
   }
 
   void scrollToMin(
@@ -256,14 +256,16 @@ class ItemScrollController {
   }
 
   void jumpToMin({double alignment = 0}) {
-    if (!_scrollableListState!.widget.reverse) {
-      jumpTo(index: 0, alignment: alignment);
-      Future.delayed(const Duration(milliseconds: 10), () {
-        _scrollableListState!._jumpToMin();
-      });
-    } else {
-      jumpToMax();
-    }
+    jumpTo(
+        index: _scrollableListState!.widget.reverse
+            ? _scrollableListState!.widget.itemCount - 1
+            : 0,
+        alignment: alignment);
+    Future.delayed(const Duration(milliseconds: 10), () {
+      _scrollableListState!.widget.reverse
+          ? _scrollableListState!._jumpToMax()
+          : _scrollableListState!._jumpToMin();
+    });
   }
 
   void scrollListener(

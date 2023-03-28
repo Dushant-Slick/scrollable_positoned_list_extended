@@ -1,5 +1,5 @@
 name: scrollable_positioned_list_extended
-version: 0.3.7
+version: 0.3.8
 description: > 
   scrollable_positioned_list with helper methods like scrollToMax,scrollToMin,jumpToMax and jumToMin.
 
@@ -10,11 +10,11 @@ environment:
 
 dependencies:
   flutter:
-    sdk: flutter
+    sdk: 'flutter'
   collection: ^1.15.0
 
 dev_dependencies:
   pedantic: ^1.10.0-0
   flutter_test:
-    sdk: flutter
+    sdk: 'flutter'
   
