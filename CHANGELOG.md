@@ -1,4 +1,4 @@
-# 0.3.7
+# 0.3.8
 * Added Reverse Order in Jump To Max and Jump to min.
 
 
