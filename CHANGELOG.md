@@ -1,3 +1,6 @@
+# 0.3.9
+* Added capabilities of package [scroll_to_index](https://pub.dev/packages/scroll_to_index).
+
 # 0.3.8
 * Added Reverse Order in Jump To Max and Jump to min.
 

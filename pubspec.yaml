@@ -1,7 +1,7 @@
 name: scrollable_positioned_list_extended
-version: 0.3.8
+version: 0.3.9
 description: > 
-  scrollable_positioned_list with helper methods like scrollToMax,scrollToMin,jumpToMax and jumToMin.
+  scrollable_positioned_list with scroll_to_index features for smoother experience.
 
 homepage : https://pub.dev/packages/scrollable_positioned_list_extended
 environment:
