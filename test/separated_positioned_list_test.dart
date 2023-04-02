@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:scrollable_positioned_list_extended/scrollable_positioned_list_extended.dart';
 import 'package:scrollable_positioned_list_extended/src/item_positions_notifier.dart';
 import 'package:scrollable_positioned_list_extended/src/positioned_list.dart';
@@ -21,7 +22,7 @@ void main() {
   Future<void> setUpWidgetTest(
     WidgetTester tester, {
     int topItem = 0,
-    ScrollController? scrollController,
+    AutoScrollController? scrollController,
     double anchor = 0,
     int itemCount = defaultItemCount,
   }) async {

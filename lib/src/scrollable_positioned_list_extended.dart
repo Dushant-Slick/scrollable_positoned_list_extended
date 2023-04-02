@@ -10,6 +10,7 @@ import 'dart:math';
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 
 import 'item_positions_listener.dart';
 import 'item_positions_notifier.dart';
@@ -270,8 +271,11 @@ class ItemScrollController {
     });
   }
 
+  AutoScrollController? get getAutoScrollController =>
+      _scrollableListState?.primaryController;
+
   void scrollListener(
-      void Function(ScrollNotfier notification) listenNotification) {
+      void Function(ScrollNotifier notification) listenNotification) {
     _scrollableListState!._scrollListener(listenNotification);
   }
 
@@ -335,7 +339,7 @@ class _ScrollablePositionedListState extends State<ScrollablePositionedList>
   /// shown when scrolling a long distance.
   var secondary = _ListDisplayDetails(const ValueKey('Pong'));
 
-  ScrollController get primaryController => primary.scrollController;
+  AutoScrollController get primaryController => primary.scrollController;
 
   final opacity = ProxyAnimation(const AlwaysStoppedAnimation<double>(0));
 
@@ -346,7 +350,6 @@ class _ScrollablePositionedListState extends State<ScrollablePositionedList>
   @override
   void initState() {
     super.initState();
-
     ItemPosition? initialPosition = PageStorage.of(context)?.readState(context);
     primary.target = initialPosition?.index ?? widget.initialScrollIndex;
     primary.alignment =
@@ -576,7 +579,7 @@ class _ScrollablePositionedListState extends State<ScrollablePositionedList>
         });
       };
       setState(() {
-        // assert(!_isTransitioning);
+        assert(!_isTransitioning);
         secondary.target = index;
         secondary.alignment = alignment;
         _isTransitioning = true;
@@ -612,9 +615,9 @@ class _ScrollablePositionedListState extends State<ScrollablePositionedList>
   }
 
   void _scrollListener(
-      void Function(ScrollNotfier notfication) listenPosition) {
+      void Function(ScrollNotifier notfication) listenPosition) {
     primary.scrollController.addListener(() {
-      listenPosition.call(ScrollNotfier(
+      listenPosition.call(ScrollNotifier(
         initialScrollOffset: primary.scrollController.initialScrollOffset,
         keepScrollOffset: primary.scrollController.keepScrollOffset,
         position: primary.scrollController.position,
@@ -686,7 +689,7 @@ class _ListDisplayDetails {
   _ListDisplayDetails(this.key);
 
   final itemPositionsNotifier = ItemPositionsNotifier();
-  final scrollController = ScrollController(keepScrollOffset: false);
+  final scrollController = AutoScrollController(keepScrollOffset: false);
 
   /// The index of the item to scroll to.
   int target = 0;
@@ -699,9 +702,9 @@ class _ListDisplayDetails {
   final Key key;
 }
 
-/// ScrollNotfier has been inherited from [ScrollController] for more info see `ScrollController`.
-class ScrollNotfier {
-  const ScrollNotfier({
+/// ScrollNotifier has been inherited from [ScrollController] for more info see `ScrollController`.
+class ScrollNotifier {
+  const ScrollNotifier({
     required this.initialScrollOffset,
     required this.keepScrollOffset,
     required this.position,

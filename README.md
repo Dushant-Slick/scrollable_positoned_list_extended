@@ -5,8 +5,11 @@ A flutter list that allows scrolling to a specific item in the list.
 Also allows determining what items are currently visible.
 
 
-# Note
+# New ❇️
+The package has recently got abilities of [scroll_to_index](https://pub.dev/packages/scroll_to_index). One can access `AutoScrollController`, but with certain 
+<a href="#limitations"><span style = "color:red">limitations.</span></a>
 
+# Note
 **This is an extension of [scrollable_positioned_list](https://pub.dev/packages/scrollable_positioned_list), which exposes helper methods like `scrollToMax` extent, `jumpToMax` extent and also `scrollListener` to listen notifications which has not implemented in that yet.**
 
 
@@ -16,7 +19,17 @@ Also allows determining what items are currently visible.
 2. `jumpToMax` For jumping to maximum extent.
 3. `scrollToMin` For scrolling to minimum extent.
 4. `jumpToMin` For jumping to minimum extent.
-5. `scrollListener` For listening `ScrollNotifications` like current offset `ScrollPostition`  see [here]().
+5. `scrollListener` For listening `ScrollNotifications` like current offset `ScrollPostition` [here](https://github.com/Yogesh-Dubey-Ayesavi/scrollable_positoned_list_extended/blob/2669a233418597d5f5191e57d48b84e0785bf2a1/lib/src/scrollable_positioned_list_extended.dart#L703).
+6. Access `AutoScrollController()` with `ItemScrollController.getAutoScrollController`. *This method must be called after ensuring `ItemScrollController.isAttached == true`.*
+
+```dart
+AutoScrollController? _autoScrollController;
+...
+    if ( itemScrollController.isAttached ){
+       _autoScrollController = itemScrollController.getAutoScrollController;
+    }
+...      
+```
 
 
 
@@ -104,9 +117,13 @@ or jump to minExtent:
 itemScrollController.jumpToMin();
 ```
 
+# limitations
 
+- `ItemScrollController.getAutoScrollController` doesn't works with below methods.
+
+  1. `highlight()`.
+  2. `cancelAllHighlights()`.
+  3. `jumpTo()`.
+--------------------------------------------------------------------------------
 A full example can be found in the example folder.
 
---------------------------------------------------------------------------------
-
-This is not an officially supported Google product.

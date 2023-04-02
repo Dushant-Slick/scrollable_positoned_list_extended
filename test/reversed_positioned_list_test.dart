@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:scrollable_positioned_list_extended/scrollable_positioned_list_extended.dart';
 import 'package:scrollable_positioned_list_extended/src/item_positions_notifier.dart';
 import 'package:scrollable_positioned_list_extended/src/positioned_list.dart';
@@ -19,7 +20,7 @@ void main() {
   Future<void> setUpWidgetTest(
     WidgetTester tester, {
     int topItem = 0,
-    ScrollController? scrollController,
+    AutoScrollController? scrollController,
     double anchor = 0,
     int itemCount = defaultItemCount,
   }) async {
@@ -182,7 +183,7 @@ void main() {
 
   testWidgets('List positioned with 0 at bottom scroll to item 5',
       (WidgetTester tester) async {
-    final scrollController = ScrollController();
+    final scrollController = AutoScrollController();
     await setUpWidgetTest(tester, scrollController: scrollController);
     await tester.pump();
 
@@ -210,7 +211,7 @@ void main() {
   testWidgets(
       'List positioned with 5 at bottom then scroll up 2 programatically',
       (WidgetTester tester) async {
-    final scrollController = ScrollController();
+    final scrollController = AutoScrollController();
     await setUpWidgetTest(tester,
         topItem: 5, scrollController: scrollController);
 
@@ -242,7 +243,7 @@ void main() {
   testWidgets('List positioned with 5 at bottom and initial scroll offset',
       (WidgetTester tester) async {
     final scrollController =
-        ScrollController(initialScrollOffset: 2 * itemHeight);
+        AutoScrollController(initialScrollOffset: 2 * itemHeight);
     await setUpWidgetTest(tester,
         topItem: 5, scrollController: scrollController);
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 import 'element_registry.dart';
 import 'item_positions_listener.dart';
 import 'item_positions_notifier.dart';
@@ -55,7 +56,7 @@ class PositionedList extends StatefulWidget {
 
   /// An object that can be used to control the position to which this scroll
   /// view is scrolled.
-  final ScrollController? controller;
+  final AutoScrollController? controller;
 
   /// Notifier that reports the items laid out in the list after each frame.
   final ItemPositionsNotifier? itemPositionsNotifier;
@@ -133,14 +134,14 @@ class _PositionedListState extends State<PositionedList> {
   final Key _centerKey = UniqueKey();
 
   final registeredElements = ValueNotifier<Set<Element>?>(null);
-  late final ScrollController scrollController;
+  late final AutoScrollController scrollController;
 
   bool updateScheduled = false;
 
   @override
   void initState() {
     super.initState();
-    scrollController = widget.controller ?? ScrollController();
+    scrollController = widget.controller ?? AutoScrollController();
     scrollController.addListener(_schedulePositionNotificationUpdate);
     _schedulePositionNotificationUpdate();
   }
@@ -237,12 +238,17 @@ class _PositionedListState extends State<PositionedList> {
   }
 
   Widget _buildItem(int index) {
-    return RegisteredElementWidget(
+    return AutoScrollTag(
       key: ValueKey(index),
-      child: widget.addSemanticIndexes
-          ? IndexedSemantics(
-              index: index, child: widget.itemBuilder(context, index))
-          : widget.itemBuilder(context, index),
+      controller: scrollController,
+      index: index,
+      child: RegisteredElementWidget(
+        key: ValueKey(index),
+        child: widget.addSemanticIndexes
+            ? IndexedSemantics(
+                index: index, child: widget.itemBuilder(context, index))
+            : widget.itemBuilder(context, index),
+      ),
     );
   }
 

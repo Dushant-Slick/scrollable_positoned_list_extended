@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:scrollable_positioned_list_extended/scrollable_positioned_list_extended.dart';
 import 'package:scrollable_positioned_list_extended/src/item_positions_notifier.dart';
 import 'package:scrollable_positioned_list_extended/src/positioned_list.dart';
@@ -20,7 +21,7 @@ void main() {
     WidgetTester tester, {
     int topItem = 0,
     Key? key,
-    ScrollController? scrollController,
+    AutoScrollController? scrollController,
     double anchor = 0,
     int itemCount = defaultItemCount,
     bool reverse = false,
@@ -266,7 +267,7 @@ void main() {
 
   testWidgets('List positioned with 0 at top scroll up 5 and shrink wrap',
       (WidgetTester tester) async {
-    final scrollController = ScrollController();
+    final scrollController = AutoScrollController();
     await setUpWidgetTest(tester, scrollController: scrollController);
     await tester.pump();
 
@@ -294,7 +295,7 @@ void main() {
   testWidgets(
       'List positioned with 5 at top then scroll up 2 programatically and shrink wrap',
       (WidgetTester tester) async {
-    final scrollController = ScrollController();
+    final scrollController = AutoScrollController();
     await setUpWidgetTest(tester,
         topItem: 5, scrollController: scrollController);
 
@@ -326,7 +327,7 @@ void main() {
   testWidgets(
       'List positioned with 5 at top then scroll down 20 programatically and shrink wrap',
       (WidgetTester tester) async {
-    final scrollController = ScrollController();
+    final scrollController = AutoScrollController();
     await setUpWidgetTest(tester,
         topItem: 5, scrollController: scrollController);
 
@@ -363,10 +364,9 @@ void main() {
   testWidgets(
       'List positioned with 5 at top and initial scroll offset and shrink wrap',
       (WidgetTester tester) async {
-    final scrollController =
-        ScrollController(initialScrollOffset: -2 * itemHeight);
+ 
     await setUpWidgetTest(tester,
-        topItem: 5, scrollController: scrollController);
+        topItem: 5, scrollController: AutoScrollController());
 
     expect(find.text('Item 2'), findsNothing);
     expect(find.text('Item 3'), findsOneWidget);

@@ -5,6 +5,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:scrollable_positioned_list_extended/scrollable_positioned_list_extended.dart';
 
 const numberOfItems = 5001;
@@ -65,6 +66,7 @@ class _ScrollablePositionedListPageState
 
   /// The alignment to be used next time the user scrolls or jumps to an item.
   double alignment = 0;
+  AutoScrollController? _autoScrollController;
 
   @override
   void initState() {
@@ -85,6 +87,7 @@ class _ScrollablePositionedListPageState
     Future.delayed(const Duration(milliseconds: 500), () {
       itemScrollController.scrollListener(
         (notification) {
+          _autoScrollController = itemScrollController.getAutoScrollController;
           debugPrint(notification.position.maxScrollExtent.toString());
 
           /// do with notification
@@ -95,8 +98,8 @@ class _ScrollablePositionedListPageState
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: OrientationBuilder(
+    return Scaffold(
+      body: OrientationBuilder(
         builder: (context, orientation) => Column(
           children: <Widget>[
             Expanded(
@@ -150,6 +153,22 @@ class _ScrollablePositionedListPageState
                           itemScrollController.jumpToMin();
                         },
                         child: Text("Jump To Min")),
+                  ],
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Column(
+                  children: [
+                    ElevatedButton(
+                        onPressed: () {
+                          /// Helper function of ``` (scroll_to_index)[https://pub.dev/packages/scroll_to_index] ``
+                          _autoScrollController?.scrollToIndex(10);
+                        },
+                        child: Text("Scroll To Index Via Scroll_To_Index")),
+                    SizedBox(
+                      height: 10,
+                    ),
                   ],
                 ),
               ],

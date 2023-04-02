@@ -80,6 +80,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "scroll_to_index",
+      "rootUri": "file:///C:/Users/yoges/Downloads/flutter_windows_3.0.4-stable/flutter/.pub-cache/hosted/pub.dartlang.org/scroll_to_index-3.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "sky_engine",
       "rootUri": "file:///C:/Users/yoges/Downloads/flutter_windows_3.0.4-stable/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
@@ -134,7 +140,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2023-03-28T18:17:20.689120Z",
+  "generated": "2023-04-02T13:49:52.265144Z",
   "generator": "pub",
   "generatorVersion": "2.18.5"
 }

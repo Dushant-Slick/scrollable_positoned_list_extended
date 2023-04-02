@@ -12,6 +12,7 @@ dependencies:
   flutter:
     sdk: 'flutter'
   collection: ^1.15.0
+  scroll_to_index: ^3.0.1
 
 dev_dependencies:
   pedantic: ^1.10.0-0
