@@ -54,6 +54,7 @@ class ScrollablePositionedList extends StatefulWidget {
     this.addAutomaticKeepAlives = true,
     this.addRepaintBoundaries = true,
     this.minCacheExtent,
+    this.customSliverWidgets,
   })  : itemPositionsNotifier = itemPositionsListener as ItemPositionsNotifier?,
         separatorBuilder = null,
         super(key: key);
@@ -79,6 +80,7 @@ class ScrollablePositionedList extends StatefulWidget {
     this.addAutomaticKeepAlives = true,
     this.addRepaintBoundaries = true,
     this.minCacheExtent,
+    this.customSliverWidgets,
   })  : assert(separatorBuilder != null),
         itemPositionsNotifier = itemPositionsListener as ItemPositionsNotifier?,
         super(key: key);
@@ -169,6 +171,9 @@ class ScrollablePositionedList extends StatefulWidget {
   /// in builds of widgets that would otherwise already be built in the
   /// cache extent.
   final double? minCacheExtent;
+
+  /// Add custom sliver widgets at the end of the [SliverList]
+  final List<Widget>? customSliverWidgets;
 
   @override
   State<StatefulWidget> createState() => _ScrollablePositionedListState();
@@ -442,6 +447,7 @@ class _ScrollablePositionedListState extends State<ScrollablePositionedList>
                       padding: widget.padding,
                       addAutomaticKeepAlives: widget.addAutomaticKeepAlives,
                       addRepaintBoundaries: widget.addRepaintBoundaries,
+                      customSliverWidgets: widget.customSliverWidgets,
                     ),
                   ),
                 ),
@@ -472,6 +478,7 @@ class _ScrollablePositionedListState extends State<ScrollablePositionedList>
                         padding: widget.padding,
                         addAutomaticKeepAlives: widget.addAutomaticKeepAlives,
                         addRepaintBoundaries: widget.addRepaintBoundaries,
+                        customSliverWidgets: widget.customSliverWidgets,
                       ),
                     ),
                   ),

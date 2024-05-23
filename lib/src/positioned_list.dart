@@ -40,6 +40,7 @@ class PositionedList extends StatefulWidget {
     this.addSemanticIndexes = true,
     this.addRepaintBoundaries = true,
     this.addAutomaticKeepAlives = true,
+    this.customSliverWidgets,
   })  : assert((positionedIndex == 0) || (positionedIndex < itemCount)),
         super(key: key);
 
@@ -125,6 +126,9 @@ class PositionedList extends StatefulWidget {
   ///
   /// See [SliverChildBuilderDelegate.addAutomaticKeepAlives].
   final bool addAutomaticKeepAlives;
+
+  /// Add custom sliver widgets at the end of the [SliverList]
+  final List<Widget>? customSliverWidgets;
 
   @override
   State<StatefulWidget> createState() => _PositionedListState();
@@ -225,6 +229,8 @@ class _PositionedListState extends State<PositionedList> {
                   ),
                 ),
               ),
+
+               ...?widget.customSliverWidgets,
           ],
         ),
       );
